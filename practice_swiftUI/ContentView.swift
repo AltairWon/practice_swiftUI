@@ -7,10 +7,23 @@
 
 import SwiftUI
 
+struct User: Identifiable {
+    var id = "Taylor Swift"
+}
+
 struct ContentView: View {
+    @State private var selectedUser: User? = nil
+    @State private var isShowingAlert = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Text("Hello, World!")
+            .onTapGesture {
+                self.selectedUser = User()
+                self.isShowingAlert = true
+            }
+            .alert(isPresented: $isShowingAlert) {
+                Alert(title: Text(selectedUser!.id))
+            }
     }
 }
 
